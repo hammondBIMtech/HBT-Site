@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hammond BIM Tech — Hero Demo</title>
+<style>
+:root{--color-primary:#1C1A1A;--color-secondary:#cecece;--color-tertiary:#C43C2F;--color-bg:#fff;--color-text:#000;--color-text-light:#fff;--font-primary:'Space Grotesk',Arial,sans-serif;--font-secondary:Inter,Arial,sans-serif;--space-xs:.75rem;--space-s:1rem;--space-m:1.5rem;--space-l:2rem;--space-xl:3rem;--text-p:clamp(1rem,.95rem + .24vw,1.125rem);--text-h1:clamp(3.2rem,2.7rem + 3vw,4.5rem);--h-height-mobile:64px;--h-height-desktop:80px;--h-height:var(--h-height-mobile);--header-border:5px;--header-offset:calc(var(--h-height) + var(--header-border))}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:var(--font-secondary);color:var(--color-text);background:#fff}body{overflow-x:hidden}.demo-header{position:sticky;top:0;z-index:20;height:var(--header-offset);display:flex;align-items:center;background:var(--color-primary);color:#fff;border-bottom:var(--header-border) solid var(--color-tertiary);padding-inline:5%;font:600 14px var(--font-primary);letter-spacing:.04em}.demo-header span{color:var(--color-tertiary)}.demo-hero{min-height:calc(100svh - var(--header-offset));display:flex;align-items:center;background:#fff}.inner{width:90%;max-width:1400px;margin:auto}.hero{display:grid;grid-template-columns:minmax(0, .85fr) minmax(0,1.15fr);gap:clamp(1.5rem,4vw,4rem);align-items:center;padding:3rem 0}.hero-content{position:relative;z-index:2}.hero h1{font-family:var(--font-primary);font-size:var(--text-h1);font-weight:700;line-height:.98;letter-spacing:-.055em;margin:0 0 1.5rem}.hero h1 span{color:var(--color-tertiary)}.hero p{max-width:35rem;font-size:var(--text-p);line-height:1.7;color:#555;margin:0 0 1.75rem}.hero-buttons{display:flex;flex-wrap:wrap;gap:1rem}.button{display:inline-flex;align-items:center;justify-content:center;padding:.85rem 1rem;border:2px solid var(--color-tertiary);background:var(--color-tertiary);color:#fff;text-decoration:none;font-weight:600;transition:transform .2s,box-shadow .2s}.button:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--color-primary)}.button.outline{background:#fff;color:var(--color-primary)}
+.hero-visual{position:relative;min-width:0;width:100%;isolation:isolate}.visual-kicker{position:absolute;z-index:3;top:2%;left:4%;font:600 10px var(--font-secondary);letter-spacing:.18em;color:#666}.visual-kicker:before{content:'';display:inline-block;width:22px;height:2px;background:var(--color-tertiary);vertical-align:middle;margin-right:8px}.building-wrap{position:relative;width:100%;aspect-ratio:1.18;display:grid;place-items:center}.building-wrap:before{content:'';position:absolute;inset:12%;background:radial-gradient(ellipse,#e8e8e8 0%,#fff 68%);z-index:-1}.building{width:100%;height:100%;object-fit:contain;filter:grayscale(.72) contrast(1.04);animation:float 7s ease-in-out infinite;mix-blend-mode:multiply}.overlay{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.leader{fill:none;stroke:var(--color-tertiary);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:400;stroke-dashoffset:400;animation:draw 1.15s ease-out forwards, leader-live 3.8s linear 1.3s infinite}.callout{opacity:0;transform-box:fill-box;transform-origin:center;animation:callout-arrive .65s cubic-bezier(.2,.8,.2,1) forwards, callout-drift 4.8s ease-in-out infinite;animation-delay:0s,1.2s}.callout:nth-child(2){animation-delay:.22s,1.5s}.callout:nth-child(3){animation-delay:.45s,1.8s}.callout:nth-child(4){animation-delay:.68s,2.1s}.callout:nth-child(5){animation-delay:.9s,2.4s}.callout:nth-child(6){animation-delay:1.12s,2.7s}.dot{fill:#fff;stroke:var(--color-tertiary);stroke-width:2.5}.dot-halo{fill:none;stroke:var(--color-tertiary);stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:pulse 2.3s ease-out infinite}.badge-circle{fill:#fff;stroke:var(--color-tertiary);stroke-width:2}.symbol{fill:none;stroke:var(--color-tertiary);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.scan{position:absolute;left:5%;right:5%;height:1px;top:15%;background:linear-gradient(90deg,transparent,#C43C2F,transparent);opacity:.4;animation:scan 7s linear infinite;pointer-events:none}.visual-foot{position:absolute;bottom:2%;right:3%;font-size:9px;letter-spacing:.16em;color:#777}.visual-foot b{color:var(--color-tertiary);font-weight:700}.micro-grid{position:absolute;inset:8%;z-index:-2;background-image:linear-gradient(#1c1a1a08 1px,transparent 1px),linear-gradient(90deg,#1c1a1a08 1px,transparent 1px);background-size:24px 24px;mask-image:linear-gradient(transparent,#000 20%,#000 80%,transparent)}
+@keyframes draw{0%{stroke-dashoffset:400}100%{stroke-dashoffset:0}}@keyframes fadein{to{opacity:1}}@keyframes callout-arrive{0%{opacity:0;transform:translateY(12px) scale(.94)}100%{opacity:1;transform:translateY(0) scale(1)}}@keyframes callout-drift{0%,100%{translate:0 0}50%{translate:0 -5px}}@keyframes leader-live{0%{stroke-dashoffset:0;opacity:.9}50%{stroke-dashoffset:-90;opacity:.55}100%{stroke-dashoffset:-180;opacity:.9}}@keyframes pulse{0%{opacity:.75;transform:scale(.65)}65%{opacity:.18;transform:scale(1.8)}100%{opacity:0;transform:scale(2.25)}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}@keyframes scan{from{top:12%;opacity:0}15%{opacity:.4}85%{opacity:.4}to{top:88%;opacity:0}}
+@media(min-width:769px){:root{--h-height:var(--h-height-desktop)}}@media(max-width:900px){.demo-hero{min-height:calc(100svh - var(--header-offset))}.hero{grid-template-columns:1fr;gap:1rem;padding:2rem 0 2rem}.hero-content{max-width:650px}.hero-visual{max-width:760px;margin:auto}.building-wrap{aspect-ratio:1.25}.hero h1{font-size:clamp(3rem,10vw,5rem)}}@media(max-width:520px){.demo-header{font-size:12px}.inner{width:92%}.hero{padding-top:2rem}.building-wrap{aspect-ratio:1.05}.visual-kicker{font-size:8px}.visual-foot{font-size:8px}.hero-buttons{gap:.65rem}.button{padding:.75rem .8rem;font-size:.9rem}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}.leader{stroke-dashoffset:0;animation:none}.callout{opacity:1;transform:none;translate:none}}
+</style>
+</head>
+<body>
+<main class="demo-hero">
+  <section class="inner hero">
+    <div class="hero-content">
+      <h1>BIM.<br><span>BUILT TOGETHER.</span></h1>
+      <p>Flexible project support for civil engineering teams across BIM modelling, custom programming and automation.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="button">Portfolio <span aria-hidden="true">↗</span></a>
+        <a href="#knowledge" class="button outline">Knowledge Base <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-label="Animated structural building illustration with technical BIM callouts">
+      <div class="visual-kicker">HBT-DGT-ENG-EST-2026</div>
+      <div class="micro-grid"></div><div class="scan"></div>
+      <div class="building-wrap">
+        <img class="building" src="/assets/media/hero-image.webp" alt="Structural building model with exposed concrete floors, steel framing and building services">
+        <svg class="overlay" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true">
+          <g class="callout">
+            <polyline class="leader" points="255,260 170,175 90,175"/>
+            <circle class="dot-halo" cx="255" cy="260" r="6"/><circle class="dot" cx="255" cy="260" r="5"/>
+            <circle class="badge-circle" cx="70" cy="175" r="22"/><path class="symbol" d="M59 169l11-6 11 6-11 6z M59 169v13l11 6 11-6v-13 M70 175v13"/>
+          </g>
+          <g class="callout">
+            <polyline class="leader" points="440,155 520,80 650,80"/>
+            <circle class="dot-halo" cx="440" cy="155" r="6"/><circle class="dot" cx="440" cy="155" r="5"/>
+            <circle class="badge-circle" cx="675" cy="80" r="22"/><circle class="symbol" cx="675" cy="80" r="11"/><circle class="symbol" cx="675" cy="80" r="5"/><path class="symbol" d="M675 64v5m0 22v5m-16-16h5m22 0h5"/>
+          </g>
+          <g class="callout">
+            <polyline class="leader" points="770,285 850,205 925,205"/>
+            <circle class="dot-halo" cx="770" cy="285" r="6"/><circle class="dot" cx="770" cy="285" r="5"/>
+            <circle class="badge-circle" cx="945" cy="205" r="22"/><path class="symbol" d="M934 194h22v5h-22z M939 199v17m12-17v17m-17 0h22"/>
+          </g>
+          <g class="callout">
+            <polyline class="leader" points="330,435 235,520 120,520"/>
+            <circle class="dot-halo" cx="330" cy="435" r="6"/><circle class="dot" cx="330" cy="435" r="5"/>
+            <circle class="badge-circle" cx="95" cy="520" r="22"/><path class="symbol" d="M85 507h13l7 7v19H85z M98 507v7h7 M89 520h11m-11 5h11"/>
+          </g>
+          <g class="callout">
+            <polyline class="leader" points="665,430 760,505 885,505"/>
+            <circle class="dot-halo" cx="665" cy="430" r="6"/><circle class="dot" cx="665" cy="430" r="5"/>
+            <circle class="badge-circle" cx="910" cy="505" r="22"/><rect class="symbol" x="899" y="494" width="9" height="9"/><rect class="symbol" x="912" y="494" width="9" height="9"/><rect class="symbol" x="899" y="507" width="9" height="9"/><rect class="symbol" x="912" y="507" width="9" height="9"/>
+          </g>
+          <g class="callout">
+            <polyline class="leader" points="520,585 585,640 685,640"/>
+            <circle class="dot-halo" cx="520" cy="585" r="6"/><circle class="dot" cx="520" cy="585" r="5"/>
+            <circle class="badge-circle" cx="710" cy="640" r="22"/><path class="symbol" d="M699 629h22v5h-22z M703 634v17m7-17v17m7-17v17"/>
+          </g>
+        </svg>
+      </div>
+      <div class="visual-foot"><b>HBT / 001</b> &nbsp;</div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

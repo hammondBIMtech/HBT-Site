@@ -1,0 +1,328 @@
+
+/* ============================================================
+   BLOG — ARTICLE TEMPLATE
+   Uses global.css design tokens.
+   Scoped to #blog-article-page.
+   ============================================================ */
+
+/* ---------- PAGE LAYOUT ---------- */
+
+#blog-article-page {
+    width: var(--inner-width);
+    max-width: var(--inner-max);
+    margin-inline: auto;
+    padding-top: calc(var(--h-height) + var(--space-l));
+    padding-bottom: var(--space-2xl);
+    color: var(--color-text);
+}
+
+/* ---------- NAVIGATION ---------- */
+
+#blog-article-page .article-navigation {
+    margin-bottom: var(--space-l);
+}
+
+#blog-article-page .article-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-primary);
+    font-family: var(--font-secondary);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+#blog-article-page .article-back-link:hover {
+    color: var(--color-tertiary);
+}
+
+#blog-article-page .article-back-link:focus-visible {
+    outline: 2px solid var(--color-tertiary);
+    outline-offset: 4px;
+}
+
+/* ---------- ARTICLE CONTAINER ---------- */
+
+#blog-article {
+    width: 100%;
+    max-width: 900px;
+    min-width: 0;
+    margin-inline: auto;
+}
+
+/* Supports class-based markup rendered by blog-article.js */
+
+#blog-article-page .article-content {
+    width: 100%;
+    min-width: 0;
+}
+
+/* ---------- FEATURED IMAGE ---------- */
+
+#blog-article-page .article-image-wrap {
+    width: 100%;
+    margin: 0 0 var(--space-xl);
+    overflow: hidden;
+    background-color: #f7f6f3;
+    border: 1px solid var(--color-secondary);
+}
+
+#blog-article-page .article-image-wrap[hidden] {
+    display: none;
+}
+
+#blog-article-page .article-image-wrap img,
+#blog-article-page #blog-article-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 560px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* ---------- ARTICLE BODY ---------- */
+
+#blog-article-page .article-body,
+#blog-article-page #blog-article-body {
+    width: 100%;
+    min-width: 0;
+    color: var(--color-text);
+    font-family: var(--font-secondary);
+    font-size: var(--text-p);
+    line-height: var(--lh-body);
+    overflow-wrap: anywhere;
+}
+
+/* Paragraphs */
+
+#blog-article-page .article-body p,
+#blog-article-page #blog-article-body p {
+    margin: 0 0 var(--space-m);
+    font-family: var(--font-secondary);
+    font-size: var(--text-p);
+    line-height: var(--lh-body);
+}
+
+/* Headings within articles */
+
+#blog-article-page .article-body h2,
+#blog-article-page #blog-article-body h2 {
+    margin: var(--space-xl) 0 var(--space-s);
+    font-family: var(--font-primary);
+    font-size: var(--text-h3);
+    line-height: var(--lh-heading);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+}
+
+#blog-article-page .article-body h3,
+#blog-article-page #blog-article-body h3 {
+    margin: var(--space-l) 0 var(--space-s);
+    font-family: var(--font-primary);
+    font-size: var(--text-h5);
+    line-height: var(--lh-heading);
+    font-weight: 600;
+}
+
+#blog-article-page .article-body h4,
+#blog-article-page #blog-article-body h4 {
+    margin: var(--space-m) 0 var(--space-xs);
+    font-family: var(--font-primary);
+    font-size: var(--text-h6);
+    line-height: var(--lh-heading);
+}
+
+/* Lists */
+
+#blog-article-page .article-body ul,
+#blog-article-page .article-body ol,
+#blog-article-page #blog-article-body ul,
+#blog-article-page #blog-article-body ol {
+    margin: 0 0 var(--space-m);
+    padding-left: var(--space-l);
+}
+
+#blog-article-page .article-body ul,
+#blog-article-page #blog-article-body ul {
+    list-style: disc;
+}
+
+#blog-article-page .article-body ol,
+#blog-article-page #blog-article-body ol {
+    list-style: decimal;
+}
+
+#blog-article-page .article-body li,
+#blog-article-page #blog-article-body li {
+    margin-bottom: var(--space-xs);
+    padding-left: var(--space-3xs);
+    line-height: var(--lh-body);
+}
+
+#blog-article-page .article-body li::marker,
+#blog-article-page #blog-article-body li::marker {
+    color: var(--color-tertiary);
+}
+
+/* Links inside article content */
+
+#blog-article-page .article-body a,
+#blog-article-page #blog-article-body a {
+    color: var(--color-tertiary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere;
+}
+
+#blog-article-page .article-body a:hover,
+#blog-article-page #blog-article-body a:hover {
+    color: var(--color-primary);
+}
+
+/* Blockquotes */
+
+#blog-article-page .article-body blockquote,
+#blog-article-page #blog-article-body blockquote {
+    margin: var(--space-l) 0;
+    padding: var(--space-s) var(--space-m);
+    border-left: 4px solid var(--color-tertiary);
+    background-color: #f7f6f3;
+    color: #565150;
+}
+
+#blog-article-page .article-body blockquote p,
+#blog-article-page #blog-article-body blockquote p {
+    margin-bottom: 0;
+}
+
+/* Code blocks */
+
+#blog-article-page .article-body pre,
+#blog-article-page #blog-article-body pre {
+    max-width: 100%;
+    margin: var(--space-m) 0;
+    padding: var(--space-m);
+    overflow-x: auto;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    font-family: monospace;
+    font-size: var(--text-xs);
+    line-height: 1.6;
+}
+
+#blog-article-page .article-body code,
+#blog-article-page #blog-article-body code {
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+#blog-article-page .article-body :not(pre) > code,
+#blog-article-page #blog-article-body :not(pre) > code {
+    padding: 0.15em 0.35em;
+    background-color: #f0eded;
+    overflow-wrap: anywhere;
+}
+
+/* Tables */
+
+#blog-article-page .article-body table,
+#blog-article-page #blog-article-body table {
+    display: block;
+    width: 100%;
+    margin: var(--space-m) 0;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: var(--text-xs);
+}
+
+#blog-article-page .article-body th,
+#blog-article-page .article-body td,
+#blog-article-page #blog-article-body th,
+#blog-article-page #blog-article-body td {
+    padding: var(--space-xs);
+    border: 1px solid var(--color-secondary);
+    text-align: left;
+    vertical-align: top;
+}
+
+#blog-article-page .article-body th,
+#blog-article-page #blog-article-body th {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    font-weight: 600;
+}
+
+/* ---------- ARTICLE FOOTER ---------- */
+
+#blog-article-page .article-footer {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-m);
+    border-top: 1px solid var(--color-secondary);
+}
+
+/* ---------- LOADING AND ERROR MESSAGES ---------- */
+
+#blog-article-page .article-message,
+#blog-article-message {
+    max-width: 900px;
+    margin: var(--space-l) auto 0;
+    padding: var(--space-m);
+    border-left: 4px solid var(--color-tertiary);
+    background-color: #f7f6f3;
+    color: var(--color-primary);
+    font-family: var(--font-secondary);
+    font-size: var(--text-p);
+    line-height: var(--lh-body);
+}
+
+#blog-article-page .article-message[hidden],
+#blog-article-message[hidden] {
+    display: none;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (min-width: 769px) {
+    #blog-article-page {
+        padding-top: calc(var(--h-height) + var(--space-xl));
+        padding-bottom: var(--space-3xl);
+    }
+
+    #blog-article-page .article-navigation {
+        margin-bottom: var(--space-xl);
+    }
+}
+
+@media (max-width: 480px) {
+    #blog-article-page {
+        padding-top: calc(var(--h-height) + var(--space-m));
+        padding-bottom: var(--space-xl);
+    }
+
+    #blog-article-page .article-image-wrap {
+        margin-bottom: var(--space-l);
+    }
+
+    #blog-article-page .article-body h2,
+    #blog-article-page #blog-article-body h2 {
+        margin-top: var(--space-l);
+    }
+
+    #blog-article-page .article-footer {
+        margin-top: var(--space-xl);
+    }
+}
+
+/* ---------- ACCESSIBILITY ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    #blog-article-page .article-back-link {
+        transition: none;
+    }
+}

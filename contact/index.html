@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body>
+
+        <div id="header"></div>
+
+    <main class="contact-page">
+
+        <!-- HERO -->
+        <section class="contact-hero">
+            <div class="inner contact-hero-inner">
+
+                <div class="contact-eyebrow">
+                    <span class="contact-dot"></span>
+                    LET'S TALK ENGINEERING
+                </div>
+
+                <h1>
+                    Have a project<br>
+                    <span>in mind?</span>
+                </h1>
+
+                <div class="contact-hero-bottom">
+                    <div class="contact-rule"></div>
+                    <p>
+                        BIM, structural modelling, digital workflows or
+                        something a little different. Tell me what you're
+                        working on.
+                    </p>
+                </div>
+
+                <div class="contact-graphic" aria-hidden="true">
+                    <div class="graphic-circle"></div>
+                    <div class="graphic-square"></div>
+                    <div class="graphic-line"></div>
+                    <span>HBT / 01</span>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT CONTENT -->
+        <section class="contact-main">
+            <div class="inner contact-grid">
+
+                <div class="contact-intro">
+                    <p class="contact-label">01 / GET IN TOUCH</p>
+
+                    <h2>
+                        Let's make<br>
+                        something <span>work.</span>
+                    </h2>
+
+                    <p class="contact-copy">
+                        Whether you need help with a BIM workflow, have a
+                        project to discuss, or simply want to connect with
+                        someone working at the intersection of engineering
+                        and technology, I'd be glad to hear from you.
+                    </p>
+
+                    <div class="contact-detail">
+                        <span class="contact-detail-number">A</span>
+                        <div>
+                            <h3>General enquiries</h3>
+                            <p>Project discussions, collaborations and questions.</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-detail">
+                        <span class="contact-detail-number">B</span>
+                        <div>
+                            <h3>BIM & digital engineering</h3>
+                            <p>Modelling, coordination and technical workflows.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="contact-form-panel">
+                    <div class="contact-form-heading">
+                        <p class="contact-label">02 / SEND A MESSAGE</p>
+                        <span class="contact-index">HBT—CONTACT</span>
+                    </div>
+
+                    <form
+                     class="contact-form"
+                     action="https://formspree.io/f/YOUR_FORM_ID"
+                     method="POST"    
+                    >
+
+                        <div class="contact-field">
+                            <label for="contact-name">Your name</label>
+                            <input
+                                type="text"
+                                id="contact-name"
+                                name="name"
+                                placeholder="John Smith"
+                                autocomplete="name"
+                                required
+                            >
+                        </div>
+
+                        <div class="contact-field">
+                            <label for="contact-email">Email address</label>
+                            <input
+                                type="email"
+                                id="contact-email"
+                                name="email"
+                                placeholder="john@example.com"
+                                autocomplete="email"
+                                required
+                            >
+                        </div>
+
+                        <div class="contact-field">
+                            <label for="contact-subject">What is it about?</label>
+                            <select id="contact-subject" name="subject" required>
+                                <option value="" disabled selected>Select an enquiry</option>
+                                <option value="BIM modelling">BIM modelling</option>
+                                <option value="Structural engineering">Structural engineering</option>
+                                <option value="Digital workflows">Digital workflows</option>
+                                <option value="Software and automation">Software and automation</option>
+                                <option value="Collaboration">Collaboration</option>
+                                <option value="Other">Something else</option>
+                            </select>
+                        </div>
+
+                        <div class="contact-field">
+                            <label for="contact-message">Your message</label>
+                            <textarea
+                                id="contact-message"
+                                name="message"
+                                rows="5"
+                                placeholder="Tell me a little about your project..."
+                                required
+                            ></textarea>
+                        </div>
+
+                        <button class="button tertiary contact-submit" type="submit">
+                            Send enquiry <span aria-hidden="true">↗</span>
+                        </button>
+
+                        <p class="contact-form-note">
+                            Fields marked above are required. I'll get back to you
+                            as soon as I can.
+                        </p>
+
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- BOTTOM STRIP -->
+        <section class="contact-bottom">
+            <div class="inner contact-bottom-inner">
+                <p>ENGINEERING × TECHNOLOGY × BIM</p>
+                <span>HBT / 2026</span>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+    
+
+
+
+    <script src="/assets/js/components.js"></script>
+    <script src="/assets/js/script.js"></script>
+</body>
+</html>

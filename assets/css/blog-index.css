@@ -1,0 +1,111 @@
+
+/* =========================================
+   KNOWLEDGE BASE — CARD LAYOUT
+   ========================================= */
+
+.kb .knowledge-base-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l);
+    width: 100%;
+    align-items: stretch;
+}
+
+.kb .kb-content-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-s);
+    min-width: 0;
+    height: 100%;
+}
+
+/* Card headings */
+
+.kb .kb-content-card h5 {
+    margin-bottom: 0;
+    color: var(--color-text-light);
+    font-size: var(--text-h6);
+    line-height: var(--lh-heading);
+}
+
+/* Consistent image dimensions */
+
+.kb .cc-img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+    overflow: hidden;
+    background-color: var(--color-primary);
+}
+
+.kb .cc-img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.4s ease;
+}
+
+.kb .kb-content-card:hover .cc-img img {
+    transform: scale(1.035);
+}
+
+/* Card description */
+
+.kb .kb-content-card > p {
+    margin-bottom: 0;
+    line-height: var(--lh-body);
+}
+
+/* Two vertically stacked actions */
+
+.kb .kb-card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    width: 100%;
+    margin-top: auto;
+    padding-top: var(--space-xs);
+}
+
+.kb .kb-card-actions .button.secondary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 46px;
+    padding: var(--space-xs) var(--space-s);
+    border: 2px solid var(--color-secondary);
+    text-decoration: none;
+    text-align: left;
+}
+
+/* Tablet: 2 columns */
+
+@media (min-width: 729px) {
+    .kb .knowledge-base-content {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: stretch;
+        gap: var(--space-l);
+    }
+}
+
+/* Desktop: 3 columns */
+
+@media (min-width: 1024px) {
+    .kb .knowledge-base-content {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-l);
+    }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+    .kb .cc-img img {
+        transition: none;
+    }
+}

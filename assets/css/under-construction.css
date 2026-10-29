@@ -1,0 +1,370 @@
+
+/* =========================================================
+   UNDER CONSTRUCTION
+   HAMMOND WEB SOLUTIONS
+   ========================================================= */
+
+.construction-page {
+    --construction-ink: #1C1A1A;
+    --construction-red: #C43C2F;
+    --construction-paper: #f7f6f3;
+    --construction-muted: #6f6b69;
+
+    min-height: var(--av);
+    background: var(--construction-paper);
+}
+
+/* Hero */
+
+.construction-hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: var(--av);
+    overflow: hidden;
+    padding-block: clamp(3rem, 7vw, 7rem);
+    background:
+        linear-gradient(
+            125deg,
+            var(--construction-paper) 0%,
+            #ffffff 58%,
+            #eeece8 100%
+        );
+}
+
+.construction-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+        linear-gradient(#1c1a1a08 1px, transparent 1px),
+        linear-gradient(90deg, #1c1a1a08 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: linear-gradient(
+        to right,
+        black,
+        transparent 95%
+    );
+}
+
+.construction-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-2xl);
+    width: var(--inner-width);
+    max-width: var(--inner-max);
+    margin-inline: auto;
+}
+
+/* Text */
+
+.construction-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-m);
+    animation: construction-rise 0.8s ease both;
+}
+
+.construction-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--construction-muted);
+    font-family: var(--font-secondary);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--construction-red);
+    box-shadow: 0 0 0 4px #c43c2f18;
+    animation: construction-pulse 2s ease-in-out infinite;
+}
+
+.construction-copy h1 {
+    margin: 0;
+    color: var(--construction-ink);
+    font-family: var(--font-primary);
+    font-size: clamp(3.2rem, 7vw, 6.5rem);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.075em;
+    text-wrap: balance;
+}
+
+.construction-copy h1 span {
+    color: var(--construction-red);
+}
+
+.construction-description {
+    max-width: 490px;
+    margin: 0;
+    color: #565150;
+    font-family: var(--font-secondary);
+    font-size: var(--text-p);
+    line-height: 1.85;
+}
+
+.construction-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-s);
+    margin-top: var(--space-xs);
+}
+
+.construction-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    padding: var(--space-s) var(--space-m);
+    border: 2px solid var(--construction-red);
+    background: var(--construction-red);
+    color: white;
+    font-family: var(--font-secondary);
+    font-size: var(--text-p);
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.construction-button span {
+    font-size: 1.4em;
+    line-height: 1;
+    transition: transform 0.25s ease;
+}
+
+.construction-button:hover {
+    transform: translate(-3px, -3px);
+    background: var(--construction-ink);
+    border-color: var(--construction-ink);
+    color: white;
+    box-shadow: 5px 5px 0 var(--construction-red);
+}
+
+.construction-button:hover span {
+    transform: translate(3px, -3px);
+}
+
+.construction-note {
+    color: var(--construction-muted);
+    font-family: var(--font-secondary);
+    font-size: var(--text-xs);
+    line-height: 1.6;
+}
+
+/* Technical graphic */
+
+.construction-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 520px;
+    aspect-ratio: 1;
+    justify-self: center;
+    overflow: hidden;
+    border: 1px solid #d8d4cf;
+    background: #242121;
+    background-image:
+        linear-gradient(#ffffff09 1px, transparent 1px),
+        linear-gradient(90deg, #ffffff09 1px, transparent 1px);
+    background-size: 24px 24px;
+    animation: construction-rise 1s 0.15s ease both;
+}
+
+.construction-visual::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border: 1px solid #ffffff12;
+    pointer-events: none;
+}
+
+.blueprint-grid {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(
+            circle at center,
+            #c43c2f12,
+            transparent 65%
+        );
+}
+
+.construction-drawing {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+    overflow: visible;
+}
+
+.blueprint-label {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    color: #d0cccc;
+    font-family: var(--font-secondary);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+.blueprint-label-top {
+    top: var(--space-m);
+    left: var(--space-m);
+    padding-left: var(--space-xs);
+    border-left: 3px solid var(--construction-red);
+}
+
+.blueprint-label-bottom {
+    right: var(--space-m);
+    bottom: var(--space-m);
+    left: var(--space-m);
+    padding-top: var(--space-s);
+    border-top: 1px solid #ffffff25;
+}
+
+.blueprint-label-bottom span:not(:last-child)::after {
+    content: "/";
+    margin-left: var(--space-s);
+    color: var(--construction-red);
+}
+
+.blueprint-index {
+    position: absolute;
+    right: var(--space-m);
+    top: var(--space-m);
+    color: var(--construction-red);
+    font-family: var(--font-primary);
+    font-size: var(--text-h5);
+    font-weight: 700;
+}
+
+/* Bottom identification */
+
+.construction-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-s);
+    grid-column: 1 / -1;
+    padding-top: var(--space-m);
+    border-top: 1px solid #d8d4cf;
+    color: var(--construction-muted);
+    font-family: var(--font-secondary);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+}
+
+/* Animation */
+
+@keyframes construction-rise {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes construction-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 4px #c43c2f18;
+    }
+
+    50% {
+        box-shadow: 0 0 0 7px #c43c2f0b;
+    }
+}
+
+/* Desktop */
+
+@media (min-width: 1024px) {
+    .construction-inner {
+        grid-template-columns:
+            minmax(0, 1.05fr)
+            minmax(0, 0.95fr);
+        column-gap: clamp(3rem, 6vw, 6rem);
+        row-gap: var(--space-2xl);
+    }
+
+    .construction-visual {
+        justify-self: end;
+    }
+
+    .construction-actions {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--space-m);
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .construction-hero {
+        padding-block: var(--space-2xl);
+    }
+
+    .construction-inner {
+        gap: var(--space-xl);
+    }
+
+    .construction-copy h1 {
+        font-size: clamp(3.2rem, 13vw, 4.8rem);
+    }
+
+    .construction-visual {
+        max-width: 430px;
+    }
+
+    .construction-footer {
+        flex-direction: column;
+        gap: var(--space-2xs);
+    }
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    .construction-copy,
+    .construction-visual,
+    .status-dot {
+        animation: none;
+    }
+
+    .construction-button,
+    .construction-button span {
+        transition: none;
+    }
+
+    .construction-button:hover {
+        transform: none;
+    }
+}

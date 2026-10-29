@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/blog-index.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+
+    
+<!-- Blog Page: Knowledge Base -->
+<section class="kb" id="blog-page">
+    <div class="inner knowledge-base" id="blog-content">
+
+        <h2 id="blog-title">Blog</h2>
+
+        <hr class="line-break-p">
+
+        <h5 id="blog-subtitle" style="color: var(--color-text-light);">
+            Industry Insights &amp; Technical Explorations
+        </h5>
+
+        <p id="blog-intro">
+            Explore my blog posts for perspectives on common engineering
+            and construction challenges, discussions of industry practices,
+            and deeper dives into the tools and software I develop. From
+            practical BIM workflows to custom programming and automation,
+            these posts share how I approach industry problems and explore
+            opportunities to improve the way engineering teams work.
+        </p>
+
+        <!-- JavaScript injects article cards here -->
+        <div
+            class="knowledge-base-content"
+            id="blog-articles"
+            aria-live="polite"
+        ></div>
+
+        <!-- JavaScript creates pagination buttons here -->
+        <nav
+            id="blog-pagination"
+            class="kb-pagination"
+            aria-label="Blog pagination"
+        ></nav>
+
+    </div>
+</section>
+
+
+
+    <!-- Footer -->
+    <div id="footer"></div>
+    
+
+
+
+    <script src="/assets/js/components.js"></script>
+    <script src="/assets/js/script.js"></script>
+    <script src="/assets/js/blog.js"></script>
+</body>
+</html>
