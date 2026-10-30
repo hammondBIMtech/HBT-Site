@@ -22,15 +22,14 @@
 
     // =========================================
     // HTML TEMPLATE
-    // Edit the article markup here
     // =========================================
 
     function renderArticle(article) {
+        const title = article.title || "Article";
+        const subHeading = article.subHeading || "";
 
-        document.title =
-            `${article.title || "Article"} | Hammond Web Solutions`;
+        document.title = `${title} | Hammond Web Solutions`;
 
-        // EDIT THE HTML BELOW TO CHANGE THE ARTICLE LAYOUT
         articleContainer.innerHTML = `
             <div class="article-navigation">
                 <a href="/blog/index.html" class="article-back-link">
@@ -39,9 +38,8 @@
             </div>
 
             <article class="article-content">
-                <h1>${article.title}</h1>
+                <h1>${escapeHTML(title)}</h1>
 
-                <!-- Featured Image -->
                 <figure
                     class="article-image-wrap"
                     ${article.imageUrl ? "" : "hidden"}
@@ -49,28 +47,25 @@
                     <img
                         class="article-image"
                         src="${escapeAttribute(article.imageUrl || "")}"
-                        alt="${escapeAttribute(
-                            article.title
-                                ? `Image for ${article.title}`
-                                : "Article image"
-                        )}"
+                        alt="${escapeAttribute(`Image for ${title}`)}"
                     >
                 </figure>
 
-                <h5>${article.subHeading}</h5>
+                ${
+                    subHeading
+                        ? `<h5 class="article-subheading">${escapeHTML(subHeading)}</h5>`
+                        : ""
+                }
 
-                <!-- Article Body -->
                 <div class="article-body">
                     ${renderBody(article.body)}
                 </div>
 
-                <!-- Article Footer -->
                 <footer class="article-footer">
                     <a href="/blog/index.html" class="article-back-link">
                         &larr; Back to All Articles
                     </a>
                 </footer>
-
             </article>
         `;
 
@@ -84,10 +79,9 @@
 
 
     // =========================================
-    // CONTENT HELPERS
+    // SECURITY HELPERS
     // =========================================
 
-    // Escape text before inserting it into an HTML template
     function escapeHTML(value) {
         return String(value)
             .replace(/&/g, "&amp;")
@@ -101,20 +95,175 @@
         return escapeHTML(value);
     }
 
-    // Turn the JSON body into editable HTML paragraphs
+
+    // =========================================
+    // MARKDOWN NORMALISATION
+    // Handles accidentally escaped Markdown
+    // =========================================
+
+    function normaliseMarkdown(text) {
+        return String(text || "")
+            .replace(/\\(?=#{1,6}\s)/g, "")
+            .replace(/\\(?=\*\*)/g, "")
+            .trim();
+    }
+
+
+    // =========================================
+    // INLINE MARKDOWN
+    // Bold, italic and inline code
+    // =========================================
+
+    function renderInline(text) {
+        let result = escapeHTML(text);
+
+        // Inline code: `example`
+        result = result.replace(
+            /`([^`]+)`/g,
+            "<code>$1</code>"
+        );
+
+        // Bold: **example**
+        result = result.replace(
+            /\*\*(.+?)\*\*/g,
+            "<strong>$1</strong>"
+        );
+
+        // Italic: *example*
+        result = result.replace(
+            /(^|[^*])\*([^*]+)\*(?!\*)/g,
+            "$1<em>$2</em>"
+        );
+
+        return result;
+    }
+
+
+    // =========================================
+    // BLOCK MARKDOWN
+    // Headings, paragraphs, lists and quotes
+    // =========================================
+
     function renderBody(body) {
-        const bodyText = String(body || "").trim();
+        const bodyText = normaliseMarkdown(body);
 
         if (!bodyText) {
             return "<p>No article content is available yet.</p>";
         }
 
-        return bodyText
-            .split(/\n\s*\n/)
-            .map(paragraph => paragraph.trim())
-            .filter(Boolean)
-            .map(paragraph => `<p>${escapeHTML(paragraph)}</p>`)
-            .join("\n");
+        const lines = bodyText.split(/\r?\n/);
+        const output = [];
+
+        let paragraphLines = [];
+        let listItems = [];
+        let listType = null;
+
+        function flushParagraph() {
+            if (!paragraphLines.length) return;
+
+            const content = paragraphLines
+                .map(line => line.trim())
+                .filter(Boolean)
+                .join(" ");
+
+            if (content) {
+                output.push(`<p>${renderInline(content)}</p>`);
+            }
+
+            paragraphLines = [];
+        }
+
+        function flushList() {
+            if (!listItems.length || !listType) return;
+
+            const items = listItems
+                .map(item => `<li>${renderInline(item)}</li>`)
+                .join("\n");
+
+            output.push(`<${listType}>\n${items}\n</${listType}>`);
+
+            listItems = [];
+            listType = null;
+        }
+
+        function flushAll() {
+            flushParagraph();
+            flushList();
+        }
+
+        for (const rawLine of lines) {
+            const line = rawLine.trim();
+
+            // Blank line separates content blocks
+            if (!line) {
+                flushAll();
+                continue;
+            }
+
+            // Headings: # Heading through ###### Heading
+            const headingMatch = line.match(/^(#{1,6})\s+(.+)$/);
+
+            if (headingMatch) {
+                flushAll();
+
+                const level = headingMatch[1].length;
+                const content = renderInline(headingMatch[2]);
+
+                output.push(`<h${level}>${content}</h${level}>`);
+                continue;
+            }
+
+            // Unordered lists: - item or * item
+            const unorderedMatch = line.match(/^[-*]\s+(.+)$/);
+
+            if (unorderedMatch) {
+                flushParagraph();
+
+                if (listType !== "ul") {
+                    flushList();
+                    listType = "ul";
+                }
+
+                listItems.push(unorderedMatch[1]);
+                continue;
+            }
+
+            // Ordered lists: 1. item
+            const orderedMatch = line.match(/^\d+\.\s+(.+)$/);
+
+            if (orderedMatch) {
+                flushParagraph();
+
+                if (listType !== "ol") {
+                    flushList();
+                    listType = "ol";
+                }
+
+                listItems.push(orderedMatch[1]);
+                continue;
+            }
+
+            // Blockquotes: > quoted text
+            const quoteMatch = line.match(/^>\s*(.*)$/);
+
+            if (quoteMatch) {
+                flushAll();
+
+                output.push(
+                    `<blockquote><p>${renderInline(quoteMatch[1])}</p></blockquote>`
+                );
+
+                continue;
+            }
+
+            // Regular paragraph
+            flushList();
+            paragraphLines.push(line);
+        }
+
+        flushAll();
+
+        return output.join("\n");
     }
 
 
@@ -163,8 +312,8 @@
                 );
             }
 
-            const article = articles.find(item =>
-                String(item.id) === String(articleId)
+            const article = articles.find(
+                item => String(item.id) === String(articleId)
             );
 
             if (!article) {
