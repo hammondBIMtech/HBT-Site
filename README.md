@@ -66,3 +66,4 @@ Rather than treating BIM as modelling alone, Hammond BIM Tech explores how struc
 
 © Hammond BIM Tech
 
+Mon, Nov  2, 2026 11:42:36 AM
