@@ -1,0 +1,1466 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Hammond BIM Tech — Portfolio</title>
+
+<style>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+    --black: #1C1A1A;
+    --grey: #A6A6A6;
+    --light: #e7e7e7;
+    --red: #C43C2F;
+    --white: #fff;
+
+    --font-primary: 'Space Grotesk', Arial, sans-serif;
+    --font-secondary: Inter, Arial, sans-serif;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    min-height: 100%;
+}
+
+body {
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+    font-family: var(--font-secondary);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.portfolio-hero {
+    min-height: 100svh;
+
+    width: 90%;
+    max-width: 1400px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, .85fr)
+        minmax(0, 1.15fr);
+
+    gap: clamp(1.5rem, 4vw, 4rem);
+
+    align-items: center;
+
+    padding: 4rem 0;
+}
+
+
+/* =========================================================
+   LEFT CONTENT
+========================================================= */
+
+.hero-content {
+    position: relative;
+    z-index: 5;
+}
+
+.kicker {
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: .18em;
+
+    color: #666;
+
+    margin-bottom: 1.5rem;
+}
+
+.kicker::before {
+    content: "";
+
+    display: inline-block;
+
+    width: 24px;
+    height: 2px;
+
+    background: var(--red);
+
+    vertical-align: middle;
+
+    margin-right: 8px;
+}
+
+
+.hero-content h1 {
+    font-family: var(--font-primary);
+
+    font-size:
+        clamp(3.2rem, 2.7rem + 3vw, 4.5rem);
+
+    font-weight: 700;
+
+    line-height: .95;
+
+    letter-spacing: -.055em;
+
+    margin: 0 0 1.5rem;
+}
+
+.hero-content h1 span {
+    color: var(--red);
+}
+
+
+.hero-content p {
+    max-width: 34rem;
+
+    font-size:
+        clamp(1rem, .95rem + .24vw, 1.125rem);
+
+    line-height: 1.7;
+
+    color: #555;
+
+    margin: 0 0 1.75rem;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: .85rem 1rem;
+
+    border: 2px solid var(--red);
+
+    background: var(--red);
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition:
+        transform .2s,
+        box-shadow .2s;
+}
+
+.button:hover {
+    transform: translate(-2px, -2px);
+
+    box-shadow:
+        5px 5px 0 var(--black);
+}
+
+
+/* =========================================================
+   VISUAL
+========================================================= */
+
+.hero-visual {
+    position: relative;
+
+    width: 100%;
+
+    min-width: 0;
+
+    aspect-ratio: 1.18;
+
+    isolation: isolate;
+}
+
+
+/* faint background grid */
+
+.micro-grid {
+    position: absolute;
+
+    inset: 7%;
+
+    z-index: -2;
+
+    background-image:
+        linear-gradient(#1c1a1a08 1px, transparent 1px),
+        linear-gradient(90deg, #1c1a1a08 1px, transparent 1px);
+
+    background-size: 24px 24px;
+
+    mask-image:
+        linear-gradient(
+            transparent,
+            #000 20%,
+            #000 80%,
+            transparent
+        );
+}
+
+
+/* technical scan */
+
+.scan {
+    position: absolute;
+
+    left: 5%;
+    right: 5%;
+
+    height: 1px;
+
+    top: 10%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--red),
+            transparent
+        );
+
+    opacity: .35;
+
+    animation: scan 7s linear infinite;
+
+    z-index: 4;
+}
+
+
+/* =========================================================
+   SVG
+========================================================= */
+
+.structure {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: visible;
+}
+
+
+/* =========================================================
+   TECHNICAL GEOMETRY
+========================================================= */
+
+.hud {
+    fill: none;
+
+    stroke: #bfc0c0;
+
+    stroke-width: 1;
+
+    opacity: .55;
+
+    stroke-dasharray: 8 8;
+}
+
+.hud-solid {
+    fill: none;
+
+    stroke: #a9aaaa;
+
+    stroke-width: 1;
+
+    opacity: .45;
+}
+
+
+/* =========================================================
+   MAIN STRUCTURE
+========================================================= */
+
+.frame {
+    fill: none;
+
+    stroke: var(--black);
+
+    stroke-width: 2.2;
+
+    stroke-linejoin: round;
+
+    stroke-linecap: round;
+
+    opacity: .95;
+
+    stroke-dasharray: 1800;
+
+    stroke-dashoffset: 1800;
+
+    animation:
+        draw-frame 3s ease-out forwards;
+}
+
+
+/* subtle concrete fills */
+
+.concrete {
+    fill: #e8e8e6;
+
+    stroke: var(--black);
+
+    stroke-width: 1.5;
+
+    opacity: .85;
+}
+
+
+/* =========================================================
+   REBAR
+========================================================= */
+
+.rebar {
+    fill: none;
+
+    stroke: var(--red);
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    opacity: 0;
+
+    stroke-dasharray: 1200;
+
+    stroke-dashoffset: 1200;
+
+    animation:
+        draw-rebar 3.2s ease-out 1.8s forwards;
+}
+
+
+.rebar-light {
+    fill: none;
+
+    stroke: var(--red);
+
+    stroke-width: 1.1;
+
+    opacity: 0;
+
+    animation:
+        fade-rebar 1s ease 2.5s forwards;
+}
+
+
+/* =========================================================
+   CALLOUTS
+========================================================= */
+
+.callout {
+    fill: none;
+
+    stroke: var(--red);
+
+    stroke-width: 1.5;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+    stroke-dasharray: 300;
+
+    stroke-dashoffset: 300;
+
+    animation:
+        draw-callout 1.2s ease-out forwards;
+}
+
+.callout-1 {
+    animation-delay: 3.1s;
+}
+
+.callout-2 {
+    animation-delay: 3.4s;
+}
+
+.callout-3 {
+    animation-delay: 3.7s;
+}
+
+.callout-4 {
+    animation-delay: 4s;
+}
+
+
+.node {
+    fill: white;
+
+    stroke: var(--red);
+
+    stroke-width: 2;
+
+    opacity: 0;
+
+    animation:
+        node-in .5s ease forwards;
+}
+
+.node-1 {
+    animation-delay: 3.5s;
+}
+
+.node-2 {
+    animation-delay: 3.8s;
+}
+
+.node-3 {
+    animation-delay: 4.1s;
+}
+
+.node-4 {
+    animation-delay: 4.4s;
+}
+
+
+/* =========================================================
+   CODE PANEL
+========================================================= */
+
+.code-panel {
+    fill: white;
+
+    stroke: var(--black);
+
+    stroke-width: 1.5;
+
+    opacity: 0;
+
+    animation:
+        panel-in .8s ease 2.8s forwards;
+}
+
+
+.code-line {
+    stroke: #777;
+
+    stroke-width: 2;
+
+    opacity: 0;
+
+    animation:
+        code-in .4s ease forwards;
+}
+
+.code-line.red {
+    stroke: var(--red);
+}
+
+.code-line:nth-child(1) {
+    animation-delay: 3.2s;
+}
+
+.code-line:nth-child(2) {
+    animation-delay: 3.35s;
+}
+
+.code-line:nth-child(3) {
+    animation-delay: 3.5s;
+}
+
+.code-line:nth-child(4) {
+    animation-delay: 3.65s;
+}
+
+.code-line:nth-child(5) {
+    animation-delay: 3.8s;
+}
+
+
+/* =========================================================
+   FLOATING DETAILS
+========================================================= */
+
+.floating {
+    animation:
+        float 6s ease-in-out infinite;
+}
+
+.floating-slow {
+    animation:
+        float 8s ease-in-out 1s infinite;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes draw-frame {
+
+    to {
+        stroke-dashoffset: 0;
+    }
+
+}
+
+
+@keyframes draw-rebar {
+
+    to {
+        opacity: 1;
+
+        stroke-dashoffset: 0;
+    }
+
+}
+
+
+@keyframes fade-rebar {
+
+    to {
+        opacity: .9;
+    }
+
+}
+
+
+@keyframes draw-callout {
+
+    to {
+        stroke-dashoffset: 0;
+    }
+
+}
+
+
+@keyframes node-in {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(.4);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+
+}
+
+
+@keyframes panel-in {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+@keyframes code-in {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(-8px);
+    }
+
+    to {
+        opacity: .8;
+
+        transform:
+            translateX(0);
+    }
+
+}
+
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-6px);
+    }
+
+}
+
+
+@keyframes scan {
+
+    0% {
+        top: 10%;
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .35;
+    }
+
+    85% {
+        opacity: .35;
+    }
+
+    100% {
+        top: 90%;
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .portfolio-hero {
+
+        grid-template-columns: 1fr;
+        grid-template-rows: 40% 1fr;
+
+        min-height: auto;
+
+        padding:
+            5rem 0 3rem;
+    }
+
+    .hero-content {
+        max-width: 650px;
+        order: 1;
+    }
+
+    .hero-visual {
+        max-width: 760px;
+        margin: auto;
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .portfolio-hero {
+        width: 92%;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .hero-visual {
+        aspect-ratio: 1;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+    }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<main class="portfolio-hero">
+
+    <section class="hero-content">
+
+        <h1>
+            EXPLORE MY<br>
+            <span>WORK.</span>
+        </h1>
+
+
+        <p>
+            Here you’ll find a selection of my work across BIM modelling, structural design, data engineering, and web and mobile application development.
+        </p>
+
+
+        <a
+            href="#projects"
+            class="button"
+        >
+            Scroll Down ↗
+        </a>
+
+    </section>
+
+
+    
+
+
+
+    <!-- =====================================================
+         RIGHT SIDE — ANIMATED TECHNICAL VISUAL
+    ====================================================== -->
+
+    <section
+        class="hero-visual"
+        aria-label="Animated engineering illustration"
+    >
+
+        <div class="micro-grid"></div>
+
+        <div class="scan"></div>
+
+
+        <svg
+            class="structure"
+            viewBox="0 0 1000 700"
+            preserveAspectRatio="xMidYMid meet"
+            aria-hidden="true"
+        >
+
+
+            <!-- =============================================
+                 TECHNICAL HUD
+            ============================================== -->
+
+            <circle
+                class="hud"
+                cx="520"
+                cy="350"
+                r="270"
+            />
+
+            <circle
+                class="hud-solid"
+                cx="520"
+                cy="350"
+                r="225"
+            />
+
+            <line
+                class="hud"
+                x1="520"
+                y1="55"
+                x2="520"
+                y2="650"
+            />
+
+            <line
+                class="hud"
+                x1="180"
+                y1="350"
+                x2="860"
+                y2="350"
+            />
+
+
+            <!-- =============================================
+                 CONCRETE FOOTINGS
+            ============================================== -->
+
+            <polygon
+                class="concrete frame"
+                points="
+                    230,535
+                    345,535
+                    345,575
+                    230,575
+                    230,535
+                "
+            />
+
+            <polygon
+                class="concrete frame"
+                points="
+                    700,535
+                    815,535
+                    815,575
+                    700,575
+                    700,535
+                "
+            />
+
+
+            <!-- =============================================
+                 LEFT COLUMN
+            ============================================== -->
+
+            <polygon
+                class="concrete frame"
+                points="
+                    270,235
+                    310,235
+                    310,540
+                    270,540
+                    270,235
+                "
+            />
+
+
+            <!-- =============================================
+                 RIGHT COLUMN
+            ============================================== -->
+
+            <polygon
+                class="concrete frame"
+                points="
+                    735,235
+                    775,235
+                    775,540
+                    735,540
+                    735,235
+                "
+            />
+
+
+            <!-- =============================================
+                 MAIN BEAM
+            ============================================== -->
+
+            <polygon
+                class="concrete frame"
+                points="
+                    270,225
+                    775,225
+                    775,265
+                    270,265
+                    270,225
+                "
+            />
+
+
+            <!-- =============================================
+                 DIAGONAL STRUCTURAL MEMBERS
+            ============================================== -->
+
+            <line
+                class="frame"
+                x1="310"
+                y1="520"
+                x2="520"
+                y2="265"
+            />
+
+            <line
+                class="frame"
+                x1="520"
+                y1="265"
+                x2="735"
+                y2="520"
+            />
+
+
+            <!-- =============================================
+                 CENTRAL CONNECTION
+            ============================================== -->
+
+            <polygon
+                class="frame"
+                points="
+                    490,265
+                    520,245
+                    550,265
+                    520,290
+                    490,265
+                "
+            />
+
+
+            <!-- =============================================
+                 RED BEAM LONGITUDINAL REBAR
+            ============================================== -->
+
+            <line
+                class="rebar"
+                x1="280"
+                y1="235"
+                x2="765"
+                y2="235"
+            />
+
+            <line
+                class="rebar"
+                x1="280"
+                y1="255"
+                x2="765"
+                y2="255"
+            />
+
+            <line
+                class="rebar"
+                x1="280"
+                y1="258"
+                x2="765"
+                y2="258"
+            />
+
+
+            <!-- =============================================
+                 BEAM STIRRUPS
+            ============================================== -->
+
+            <g class="rebar-light">
+
+                <path d="
+                    M290 228
+                    V262
+                    M310 228
+                    V262
+                    M330 228
+                    V262
+                    M350 228
+                    V262
+                    M370 228
+                    V262
+                    M390 228
+                    V262
+                    M410 228
+                    V262
+                    M430 228
+                    V262
+                    M450 228
+                    V262
+                    M470 228
+                    V262
+                    M490 228
+                    V262
+                    M510 228
+                    V262
+                    M530 228
+                    V262
+                    M550 228
+                    V262
+                    M570 228
+                    V262
+                    M590 228
+                    V262
+                    M610 228
+                    V262
+                    M630 228
+                    V262
+                    M650 228
+                    V262
+                    M670 228
+                    V262
+                    M690 228
+                    V262
+                    M710 228
+                    V262
+                    M730 228
+                    V262
+                    M750 228
+                    V262
+                " />
+
+            </g>
+
+
+            <!-- =============================================
+                 COLUMN REBAR
+            ============================================== -->
+
+            <g class="rebar">
+
+                <line
+                    x1="278"
+                    y1="245"
+                    x2="278"
+                    y2="525"
+                />
+
+                <line
+                    x1="302"
+                    y1="245"
+                    x2="302"
+                    y2="525"
+                />
+
+                <line
+                    x1="743"
+                    y1="245"
+                    x2="743"
+                    y2="525"
+                />
+
+                <line
+                    x1="767"
+                    y1="245"
+                    x2="767"
+                    y2="525"
+                />
+
+            </g>
+
+
+            <!-- =============================================
+                 COLUMN STIRRUPS
+            ============================================== -->
+
+            <g class="rebar-light">
+
+                <path d="
+                    M270 280
+                    H310
+                    M270 305
+                    H310
+                    M270 330
+                    H310
+                    M270 355
+                    H310
+                    M270 380
+                    H310
+                    M270 405
+                    H310
+                    M270 430
+                    H310
+                    M270 455
+                    H310
+                    M270 480
+                    H310
+                    M270 505
+                    H310
+
+                    M735 280
+                    H775
+                    M735 305
+                    H775
+                    M735 330
+                    H775
+                    M735 355
+                    H775
+                    M735 380
+                    H775
+                    M735 405
+                    H775
+                    M735 430
+                    H775
+                    M735 455
+                    H775
+                    M735 480
+                    H775
+                    M735 505
+                    H775
+                " />
+
+            </g>
+
+
+            <!-- =============================================
+                 CODE PANEL
+            ============================================== -->
+
+            <g class="floating">
+
+                <rect
+                    class="code-panel"
+                    x="90"
+                    y="100"
+                    width="185"
+                    height="115"
+                    rx="8"
+                />
+
+                <circle
+                    cx="108"
+                    cy="118"
+                    r="4"
+                    fill="var(--red)"
+                />
+
+                <circle
+                    cx="122"
+                    cy="118"
+                    r="4"
+                    fill="#999"
+                />
+
+                <circle
+                    cx="136"
+                    cy="118"
+                    r="4"
+                    fill="#999"
+                />
+
+
+                <line
+                    class="code-line red"
+                    x1="110"
+                    y1="140"
+                    x2="190"
+                    y2="140"
+                />
+
+                <line
+                    class="code-line"
+                    x1="110"
+                    y1="155"
+                    x2="235"
+                    y2="155"
+                />
+
+                <line
+                    class="code-line red"
+                    x1="110"
+                    y1="170"
+                    x2="175"
+                    y2="170"
+                />
+
+                <line
+                    class="code-line"
+                    x1="110"
+                    y1="185"
+                    x2="220"
+                    y2="185"
+                />
+
+                <line
+                    class="code-line"
+                    x1="110"
+                    y1="200"
+                    x2="155"
+                    y2="200"
+                />
+
+            </g>
+
+
+            <!-- =============================================
+                 EXPLODED REBAR DETAIL
+            ============================================== -->
+
+            <g class="floating-slow">
+
+                <polygon
+                    class="frame"
+                    points="
+                        700,100
+                        860,100
+                        860,150
+                        700,150
+                        700,100
+                    "
+                />
+
+                <line
+                    class="rebar"
+                    x1="710"
+                    y1="112"
+                    x2="850"
+                    y2="112"
+                />
+
+                <line
+                    class="rebar"
+                    x1="710"
+                    y1="138"
+                    x2="850"
+                    y2="138"
+                />
+
+                <path
+                    class="rebar-light"
+                    d="
+                        M720 105
+                        V145
+                        M740 105
+                        V145
+                        M760 105
+                        V145
+                        M780 105
+                        V145
+                        M800 105
+                        V145
+                        M820 105
+                        V145
+                        M840 105
+                        V145
+                    "
+                />
+
+            </g>
+
+
+            <!-- =============================================
+                 CALLOUT 1
+            ============================================== -->
+
+            <g>
+
+                <polyline
+                    class="callout callout-1"
+                    points="
+                        300,245
+                        205,185
+                        150,185
+                    "
+                />
+
+                <circle
+                    class="node node-1"
+                    cx="300"
+                    cy="245"
+                    r="5"
+                />
+
+            </g>
+
+
+            <!-- =============================================
+                 CALLOUT 2
+            ============================================== -->
+
+            <g>
+
+                <polyline
+                    class="callout callout-2"
+                    points="
+                        610,235
+                        670,180
+                        700,180
+                    "
+                />
+
+                <circle
+                    class="node node-2"
+                    cx="610"
+                    cy="235"
+                    r="5"
+                />
+
+            </g>
+
+
+            <!-- =============================================
+                 CALLOUT 3
+            ============================================== -->
+
+            <g>
+
+                <polyline
+                    class="callout callout-3"
+                    points="
+                        745,420
+                        835,470
+                        880,470
+                    "
+                />
+
+                <circle
+                    class="node node-3"
+                    cx="745"
+                    cy="420"
+                    r="5"
+                />
+
+            </g>
+
+
+            <!-- =============================================
+                 CALLOUT 4
+            ============================================== -->
+
+            <g>
+
+                <polyline
+                    class="callout callout-4"
+                    points="
+                        280,450
+                        190,500
+                        145,500
+                    "
+                />
+
+                <circle
+                    class="node node-4"
+                    cx="280"
+                    cy="450"
+                    r="5"
+                />
+
+            </g>
+
+
+            <!-- =============================================
+                 SECTION DETAIL
+            ============================================== -->
+
+            <g class="floating-slow">
+
+                <rect
+                    class="frame"
+                    x="825"
+                    y="285"
+                    width="75"
+                    height="105"
+                />
+
+                <rect
+                    x="837"
+                    y="297"
+                    width="51"
+                    height="81"
+                    fill="#eeeeec"
+                    stroke="#777"
+                    stroke-width="1"
+                />
+
+                <circle
+                    cx="846"
+                    cy="306"
+                    r="4"
+                    fill="white"
+                    stroke="var(--red)"
+                    stroke-width="2"
+                />
+
+                <circle
+                    cx="879"
+                    cy="306"
+                    r="4"
+                    fill="white"
+                    stroke="var(--red)"
+                    stroke-width="2"
+                />
+
+                <circle
+                    cx="846"
+                    cy="369"
+                    r="4"
+                    fill="white"
+                    stroke="var(--red)"
+                    stroke-width="2"
+                />
+
+                <circle
+                    cx="879"
+                    cy="369"
+                    r="4"
+                    fill="white"
+                    stroke="var(--red)"
+                    stroke-width="2"
+                />
+
+            </g>
+
+
+            <!-- =============================================
+                 BOTTOM DIGITAL MESH
+            ============================================== -->
+
+            <g
+                class="hud"
+                opacity=".35"
+            >
+
+                <path
+                    d="
+                        M80 610
+                        C180 560,
+                        230 650,
+                        330 610
+                        S480 570,
+                        580 620
+                        S740 570,
+                        850 610
+                        S950 570,
+                        1000 600
+                    "
+                />
+
+                <path
+                    d="
+                        M80 625
+                        C180 575,
+                        230 665,
+                        330 625
+                        S480 585,
+                        580 635
+                        S740 585,
+                        850 625
+                        S950 585,
+                        1000 615
+                    "
+                />
+
+                <path
+                    d="
+                        M80 640
+                        C180 590,
+                        230 680,
+                        330 640
+                        S480 600,
+                        580 650
+                        S740 600,
+                        850 640
+                        S950 600,
+                        1000 630
+                    "
+                />
+
+            </g>
+
+
+        </svg>
+
+    </section>
+
+
+    <!-- =====================================================
+         LEFT SIDE — YOUR WRITING
+    ====================================================== -->
+
+    
+
+</main>
+
+</body>
+</html>

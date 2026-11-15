@@ -80,3 +80,30 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// Portfolio
+async function portfolioHero() {
+    const hero = document.getElementById("p-hero")
+
+    if (!hero) return
+
+    try {
+        const response = await fetch ("/assets/components/portfolio-hero.html")
+
+        if (!response.ok){
+            throw new Error(`Failed to load hero`)
+        }
+
+        hero.innerHTML = await response.text()
+    } catch (error){
+        console.error(error)
+    }
+    
+}
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    portfolioHero();
+});
+
+
