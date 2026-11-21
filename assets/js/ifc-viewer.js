@@ -1,121 +1,72 @@
-import { Viewer } from
-    "https://cdn.flinker.app/ifc-viewer/v4.0.3/ifc-viewer.es.js";
+import {
+    Viewer
+} from "https://cdn.flinker.app/ifc-viewer/v4.0.3/ifc-viewer.es.js";
 
 
-console.log("A — IFC viewer JS loaded");
+// --------------------------------------------------
+// LNG TANK
+// --------------------------------------------------
 
+async function loadLngTank() {
 
-const viewerContainer =
-    document.getElementById("ifc-viewer-section");
+    const container =
+        document.getElementById("lng-tank");
 
+    const viewer =
+        new Viewer(container);
 
-console.log(
-    "B — viewer container:",
-    viewerContainer
-);
+    await viewer.ready;
 
+    const url =
+        "https://models.hammondbimtech.com/lng-tank/HBT-001-GRADED-SLAB.ifc";
 
-if (!viewerContainer) {
+    try {
 
-    console.error(
-        "Viewer container not found."
-    );
+        const response =
+            await fetch(url);
 
-    throw new Error(
-        "Could not find #ifc-viewer-section"
-    );
-}
+        if (!response.ok) {
 
+            throw new Error(
+                `Could not load IFC: ${response.status}`
+            );
 
-console.log(
-    "C — creating Flinker viewer"
-);
+        }
 
+        const buffer =
+            await response.arrayBuffer();
 
-const viewer =
-    new Viewer(viewerContainer);
+        const bytes =
+            new Uint8Array(buffer);
 
-
-console.log(
-    "D — viewer created"
-);
-
-
-await viewer.ready;
-
-
-console.log(
-    "E — Flinker viewer ready"
-);
-
-
-const url =
-    "https://models.hammondbimtech.com/rc-frame-5-story/RC%20FRAME%205%20STORY.ifc";
-
-
-try {
-
-    console.log(
-        "F — fetching IFC"
-    );
-
-
-    const response =
-        await fetch(url);
-
-
-    console.log(
-        "G — response:",
-        response.status,
-        response.statusText
-    );
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            `Could not load IFC: ${response.status}`
+        await viewer.add(
+            "HBT-001-GRADED-SLAB.ifc",
+            bytes
         );
+
+        console.log("LNG Tank loaded");
 
     }
 
+    catch (error) {
 
-    const buffer =
-        await response.arrayBuffer();
+        console.error(
+            "LNG Tank loading error:",
+            error
+        );
 
-
-    console.log(
-        "H — IFC bytes:",
-        buffer.byteLength
-    );
-
-
-    const bytes =
-        new Uint8Array(buffer);
-
-
-    console.log(
-        "I — adding IFC to viewer"
-    );
-
-
-    await viewer.add(
-        "RC FRAME 5 STORY.ifc",
-        bytes
-    );
-
-
-    console.log(
-        "J — IFC successfully loaded"
-    );
-
+    }
 }
 
-catch (error) {
 
-    console.error(
-        "IFC loading error:",
-        error
-    );
+// --------------------------------------------------
+// AUTOMATICALLY RUN THE CORRECT PROJECT
+// --------------------------------------------------
+
+if (
+    document.getElementById("lng-tank")
+) {
+
+    loadLngTank();
 
 }
