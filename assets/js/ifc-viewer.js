@@ -70,3 +70,69 @@ if (
     loadLngTank();
 
 }
+
+
+// Load RC House
+async function loadHouse() {
+
+    const container =
+        document.getElementById("RC-house");
+
+    const viewer =
+        new Viewer(container);
+
+    await viewer.ready;
+
+    const url =
+        "https://models.hammondbimtech.com/house/HOUSE.ifc";
+
+    try {
+
+        const response =
+            await fetch(url);
+
+        if (!response.ok) {
+
+            throw new Error(
+                `Could not load IFC: ${response.status}`
+            );
+
+        }
+
+        const buffer =
+            await response.arrayBuffer();
+
+        const bytes =
+            new Uint8Array(buffer);
+
+        await viewer.add(
+            "HBT-001-GRADED-SLAB.ifc",
+            bytes
+        );
+
+        console.log("RC House Loaded");
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "RC House loading error:",
+            error
+        );
+
+    }
+}
+
+
+// --------------------------------------------------
+// AUTOMATICALLY RUN THE CORRECT PROJECT
+// --------------------------------------------------
+
+if (
+    document.getElementById("RC-house")
+) {
+
+    loadHouse();
+
+}
